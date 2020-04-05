@@ -38,7 +38,8 @@ urlpatterns = [
     path('password-reset-complete/',
         auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
         name='password_reset_complete'),
-    path('profile/', user_views.profile, name='profile')    
+    path('profile/', user_views.profile, name='profile'),
+    path('files/', include('files.urls')),    
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

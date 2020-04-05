@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h2>Files List</h2>
+    <p>
+    <a href="{% url 'upload' %}" class="btn btn-primary">
+        Upload Files
+    </a>
+    </p>
+    <table class = "table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for material in materials %}
+                <tr>
+                    <td>{{ material.title }}</td>
+                    <td>
+                        <a href="{{ material.files.url }}" class='btn btn-primary btn-sm' target="_blank">
+                            Download File
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
