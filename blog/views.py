@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from .models import Post, Comment
 from django.contrib.auth.models import User
 from django.views.generic import (
@@ -69,7 +69,7 @@ class PostDeleteView(UserPassesTestMixin,LoginRequiredMixin,DeleteView):
                 return True
             return False
 
-@login_required
+'''@login_required
 def add_comment_to_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -81,6 +81,20 @@ def add_comment_to_post(request, pk):
             return redirect('post-detail', pk=post.pk)
     else:
         form = CommentForm()
-    return render(request, 'blog/add_comment_to_post.html', {'form': form})
+    return render(request, 'blog/add_comment_to_post.html', {'form': form})'''
+
+class CommentCreateView(CreateView):
+    model = Comment
+    fields = ['text']
+    success_url='/'
+    def form_valid(self, form):
+        _forum = get_object_or_404(Post, id=self.kwargs['pk'])
+        form.instance.user = self.request.user
+        form.instance.post = _forum
+        return super().form_valid(form)
+
+def comment_posted( request ):
+    referer = request.META.get('HTTP_REFERER', None)
+    return HttpResponseRedirect(referer)
 def about(request):
     return render(request, 'blog/about.html', {'title':'About'})

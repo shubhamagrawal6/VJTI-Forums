@@ -18,10 +18,10 @@
         </div>
       </article>
       <hr>
-      <a class="btn btn-outline-info" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+      <a class="btn btn-outline-info" href="{% url 'add-comment' pk=post.pk %}">Add comment</a>
   {% for comment in post.comments.all %}
     <div class="comment">
-        <div class="date">{{ comment.created_date }}</div>
+        <div class="date">{{ comment.user }}{{ comment.created_date }}</div>
         <p>{{ comment.text|linebreaks }}</p>
     </div>
   {% empty %}
