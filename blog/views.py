@@ -83,7 +83,7 @@ def add_comment_to_post(request, pk):
         form = CommentForm()
     return render(request, 'blog/add_comment_to_post.html', {'form': form})'''
 
-class CommentCreateView(CreateView):
+class CommentCreateView(LoginRequiredMixin,CreateView):
     model = Comment
     fields = ['text']
     success_url='/'
@@ -98,3 +98,4 @@ def comment_posted( request ):
     return HttpResponseRedirect(referer)
 def about(request):
     return render(request, 'blog/about.html', {'title':'About'})
+    

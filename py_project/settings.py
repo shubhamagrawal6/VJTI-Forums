@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
+    'notifs.apps.NotifsConfig',
     'files.apps.FilesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
