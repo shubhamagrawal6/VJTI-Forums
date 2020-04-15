@@ -9,6 +9,7 @@ from .views import (
     UserPostListView,
     CommentCreateView
 )
+
 from blog import views
 urlpatterns = [
     path('', PostListView.as_view(), name='blog-home'),
