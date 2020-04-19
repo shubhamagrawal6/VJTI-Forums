@@ -5,14 +5,11 @@ from django.contrib.auth.decorators import login_required
 def register(request):
     if request.method== 'POST':
         form = UserRegisterForm(request.POST)
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-            super().save(force_insert, force_update, using, update_fields)
-    if form.is_valid():
-        form.save()
-        username=form.cleaned_data.get('username')
-        messages.success(request, f'Account Created Successfully, You Can Now Login, Welcome Aboard {username}!')
-        return redirect('login')
-
+        if form.is_valid():
+            form.save()
+            username=form.cleaned_data.get('username')
+            messages.success(request, f'Account Created Successfully, You Can Now Login, Welcome Aboard {username}!')
+            return redirect('login')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
